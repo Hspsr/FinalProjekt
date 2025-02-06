@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Film } from '../model/film';
+import { AppstorageserviceService } from '../appstorageservice.service';
+import { FILMS_STORAGE } from '../appconstant';
 
 @Component({
   selector: 'app-tab2',
@@ -13,12 +15,18 @@ export class Tab2Page {
   watchedfilms: Film[] = [];
   plannedfilms: Film[] = [];
 
-  constructor() {}
+  constructor(private appStorage: AppstorageserviceService) {}
 
   async ionViewDidEnter()  {
-    this.generateDefault();
+    const loaded_films = await this.appStorage.get(FILMS_STORAGE);
+    if (loaded_films) {
+      this.films = loaded_films;
+    } else {
+      this.generateDefault();
+    }
     this.updateLists();
   }
+
   private generateDefault() {
     this.films = [
       new Film("Sám Doma", false, 103),
@@ -35,5 +43,6 @@ export class Tab2Page {
   updateLists() {
     this.plannedfilms = this.films.filter(film => !film.watched);
     this.watchedfilms = this.films.filter(film => film.watched);
+    this.appStorage.set(FILMS_STORAGE, this.films);
   }
 }
