@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Your Films
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,37 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Your Films</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-list>
+    <ion-item-group>
+      <ion-item-divider color="success" *ngIf="watchedfilms.length > 0">
+        <ion-label><b><h1>Completed</h1></b></ion-label>
+      </ion-item-divider>
+      <ion-item *ngFor="let film of watchedfilms">
+        <ion-checkbox labelPlacement="end" justify="start" [(ngModel)]="film.watched" [ngClass]="{ 'watched': film.watched, 'notwatched': !film.watched }" (ionChange)="updateLists()">
+          <ion-label [ngClass]="{ 'watched': film.watched, 'notwatched': !film.watched }">
+            <h2><b>{{ film.name }}</b></h2>
+            <p>{{ film.length }} m</p>
+          </ion-label>
+        </ion-checkbox>
+      </ion-item>
+    </ion-item-group>
+
+    <ion-item-group>
+      <ion-item-divider color="warning" *ngIf="plannedfilms.length > 0">
+        <ion-label><b><h1>Plan to Watch</h1></b></ion-label>
+      </ion-item-divider>
+      <ion-item *ngFor="let film of plannedfilms">
+        <ion-checkbox labelPlacement="end" justify="start" [(ngModel)]="film.watched" [ngClass]="{ 'watched': film.watched, 'notwatched': !film.watched }" (ionChange)="updateLists()">
+          <ion-label [ngClass]="{ 'watched': film.watched, 'notwatched': !film.watched }">
+            <h2><b>{{ film.name }}</b></h2>
+            <p>{{ film.length }} m</p>
+          </ion-label>
+        </ion-checkbox>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
 </ion-content>

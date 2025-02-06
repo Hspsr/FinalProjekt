@@ -1,0 +1,27 @@
+.watched {
+    --color: #1ebb43;
+  }
+
+.notwatched {
+--color: rgb(168, 36, 36);
+}
+
+ion-checkbox.watched {
+    --size: 32px;
+    --checkbox-background-checked: #1ebb43;
+  }
+  
+ion-checkbox::part(container).watched {
+border-radius: 6px;
+border: 2px solid #1ebb43;
+}
+
+ion-checkbox.notwatched {
+    --size: 32px;
+    --checkbox-background-checked: #db1818;
+  }
+  
+ion-checkbox::part(container).notwatched {
+border-radius: 6px;
+border: 2px solid #db1818;
+}
