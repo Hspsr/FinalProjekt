@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Add New Film
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,48 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">Add New Film</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-content [fullscreen]="true">
+    <form (ngSubmit)="addFilm()">
+      <ion-grid>
+        <ion-row style="height: 40px;"></ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="8">
+          <ion-input
+            class="custom-input"
+            label="Film Name:"
+            fill="outline"
+            shape="round"
+            labelPlacement="stacked"
+            [clearInput]="true"
+            placeholder="Enter the name of the film."
+            [(ngModel)]="newFilm.name"
+            name="filmname"
+            required
+          ></ion-input>
+          <ion-row style="height: 30px;"></ion-row>
+          <ion-input
+            class="custom-input"
+            label="Film Length:"
+            type="number"
+            fill="outline"
+            shape="round"
+            labelPlacement="stacked"
+            [clearInput]="true"
+            placeholder="Enter the length of the film in minutes."
+            [(ngModel)]="newFilm.length"
+            name="length"
+            required
+          ></ion-input>
+        </ion-col>
+        </ion-row>
+        <ion-row style="height: 25px;"></ion-row>
+      </ion-grid>
+      <ion-row class="ion-justify-content-center">
+          <ion-button class="custom-button" color="success" type="submit" shape="round" [disabled]="!newFilm.name || !newFilm.length">Add Film</ion-button>
+      </ion-row>
+    </form>
 </ion-content>

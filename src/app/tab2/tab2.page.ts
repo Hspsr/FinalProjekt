@@ -25,6 +25,14 @@ export class Tab2Page {
       this.generateDefault();
     }
     this.updateLists();
+
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkMode = await this.appStorage.get("theme");
+    if (darkMode !== null) {
+      document.documentElement.classList.toggle('ion-palette-dark', darkMode);
+    } else {
+      document.documentElement.classList.toggle('ion-palette-dark', prefersDark.matches);
+    }
   }
 
   private generateDefault() {
@@ -44,5 +52,14 @@ export class Tab2Page {
     this.plannedfilms = this.films.filter(film => !film.watched);
     this.watchedfilms = this.films.filter(film => film.watched);
     this.appStorage.set(FILMS_STORAGE, this.films);
+  }
+
+  async deleteFilm(film: Film) {
+    const index = this.films.findIndex(i => i === film);
+    if (index > -1) {
+      this.films.splice(index, 1);
+      this.appStorage.set(FILMS_STORAGE, this.films);
+      this.updateLists();
+    }
   }
 }

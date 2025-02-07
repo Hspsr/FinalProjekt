@@ -16,13 +16,16 @@
   <ion-list>
     <ion-item-group>
       <ion-item-divider color="success" *ngIf="watchedfilms.length > 0">
-        <ion-label><b><h1>Completed</h1></b></ion-label>
+        <ion-label><b><h1>Watched</h1></b></ion-label>
       </ion-item-divider>
       <ion-item *ngFor="let film of watchedfilms; let last = last;" [lines]="last ? 'none' : 'full'">
+        <ion-button color="danger" slot="end" size="default" (click)="deleteFilm(film)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
         <ion-checkbox labelPlacement="end" justify="start" [(ngModel)]="film.watched" [ngClass]="{ 'watched': film.watched, 'notwatched': !film.watched }" (ionChange)="updateLists()">
           <ion-label [ngClass]="{ 'watched': film.watched, 'notwatched': !film.watched }">
             <h2><b>{{ film.name }}</b></h2>
-            <p>{{ film.length }} m</p>
+            <p><ion-icon name="time-outline" class="label-icon"></ion-icon> {{ film.length }} m</p>
           </ion-label>
         </ion-checkbox>
       </ion-item>
@@ -33,10 +36,13 @@
         <ion-label><b><h1>Plan to Watch</h1></b></ion-label>
       </ion-item-divider>
       <ion-item *ngFor="let film of plannedfilms; let last = last;" [lines]="last ? 'none' : 'full'">
+        <ion-button color="danger" slot="end" size="default" (click)="deleteFilm(film)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
         <ion-checkbox labelPlacement="end" justify="start" [(ngModel)]="film.watched" [ngClass]="{ 'watched': film.watched, 'notwatched': !film.watched }" (ionChange)="updateLists()">
           <ion-label [ngClass]="{ 'watched': film.watched, 'notwatched': !film.watched }">
             <h2><b>{{ film.name }}</b></h2>
-            <p>{{ film.length }} m</p>
+            <p><ion-icon name="time-outline" class="label-icon"></ion-icon> {{ film.length }} m</p>
           </ion-label>
         </ion-checkbox>
       </ion-item>
